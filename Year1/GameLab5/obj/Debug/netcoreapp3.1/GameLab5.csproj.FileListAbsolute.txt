@@ -26,3 +26,17 @@ C:\Users\Kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debu
 C:\Users\Kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.dll
 C:\Users\Kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.pdb
 C:\Users\Kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.genruntimeconfig.cache
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.exe
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.deps.json
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.runtimeconfig.json
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.runtimeconfig.dev.json
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.dll
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp3.1\GameLab5.pdb
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.csproj.AssemblyReference.cache
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.AssemblyInfoInputs.cache
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.AssemblyInfo.cs
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.csproj.CoreCompileInputs.cache
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.dll
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.pdb
+C:\Users\2140455\Desktop\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp3.1\GameLab5.genruntimeconfig.cache

@@ -8,22 +8,9 @@ namespace GameLab5
     {
         
         private const string sprite = "O";
-        private bool enablecontrols = false;
         private int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
         
-        public bool EnableControls
-        {
-            get { return enablecontrols; }
-            set 
-            {
-                enablecontrols = value;
-                if (enablecontrols == true)
-                {
-                    Controls();
-                }
-            }
-        }
 
         public string Sprite
         {
@@ -31,7 +18,7 @@ namespace GameLab5
         }
 
 
-        private void Controls()
+        public void Controls()
         {
             ConsoleKey Move = Console.ReadKey().Key;
             Right(Move);
@@ -45,7 +32,8 @@ namespace GameLab5
         {
             if (Move == ConsoleKey.RightArrow)
             {
-                x++;
+                if (x < 119)
+                    x++;
                 Console.SetCursorPosition(LastX, LastY);
                 Console.Write(" ");
                 Console.SetCursorPosition(x, y);
@@ -58,15 +46,15 @@ namespace GameLab5
         {
             if (Move == ConsoleKey.LeftArrow)
             {
+
                 if (x > 0)
-                {
                     x--;
-                    Console.SetCursorPosition(LastX, LastY);
-                    Console.Write(" ");
-                    Console.SetCursorPosition(x, y);
-                    Console.Write(Sprite);
-                    LastX = x;
-                }
+                Console.SetCursorPosition(LastX, LastY);
+                Console.Write(" ");
+                Console.SetCursorPosition(x, y);
+                Console.Write(Sprite);
+                LastX = x;
+                
 
             }
         }
@@ -75,7 +63,8 @@ namespace GameLab5
         {
             if (Move == ConsoleKey.UpArrow)
             {
-                y--;
+                if (y > 0)
+                    y--;
                 Console.SetCursorPosition(LastX, LastY);
                 Console.Write(" ");
                 Console.SetCursorPosition(x, y);
@@ -88,6 +77,7 @@ namespace GameLab5
         {
             if (Move == ConsoleKey.DownArrow)
             {
+               // if (y < 120)
                 y++;
                 Console.SetCursorPosition(LastX, LastY);
                 Console.Write(" ");

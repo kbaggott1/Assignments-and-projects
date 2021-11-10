@@ -12,7 +12,7 @@ namespace GameLab5
            
             while (!gameover)
             {
-                Player.EnableControls = true;
+                Player.Controls();
             }
             
         }
