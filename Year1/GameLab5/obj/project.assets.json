@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kevin\\source\\repos\\GameLab5\\GameLab5.csproj",
+      "projectUniqueName": "C:\\Users\\Kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
       "projectName": "GameLab5",
-      "projectPath": "C:\\Users\\Kevin\\source\\repos\\GameLab5\\GameLab5.csproj",
+      "projectPath": "C:\\Users\\Kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
       "packagesPath": "C:\\Users\\Kevin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kevin\\source\\repos\\GameLab5\\obj\\",
+      "outputPath": "C:\\Users\\Kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",

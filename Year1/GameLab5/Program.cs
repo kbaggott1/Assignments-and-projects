@@ -8,13 +8,11 @@ namespace GameLab5
         {
             bool gameover = false;
             Controller Player = new Controller();
-
-            Player.EnableControls = true;
-            
-
+            Console.CursorVisible = false;
+           
             while (!gameover)
             {
-                
+                Player.EnableControls = true;
             }
             
         }
