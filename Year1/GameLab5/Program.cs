@@ -9,12 +9,13 @@ namespace GameLab5
             bool gameover = false;
             Controller Player = new Controller();
             Console.CursorVisible = false;
-           
+            
             while (!gameover)
             {
                 Player.Controls();
             }
             
+
         }
     }
 }
