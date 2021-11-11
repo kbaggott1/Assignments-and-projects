@@ -12,7 +12,6 @@ namespace GameLab5
         private int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
         private Bullets playerBullet = new Bullets();
-
         public string Sprite
         {
             get { return sprite; }
@@ -21,18 +20,17 @@ namespace GameLab5
 
         public void Controls()  // looped in main
         {
-            /// function to get the key
-            ConsoleKey userkey = Console.ReadKey().Key;
-            Move(userkey);           
-            if (bulletfiring)
-            {
-                movebullet
-            }
+            ConsoleKey userkey = ConsoleKey.NoName;            
+            GetKey(ref userkey);
+            Move(userkey);
         }
 
+        private void GetKey(ref ConsoleKey userkey)
+        {
+            if (Console.KeyAvailable)
+                userkey = Console.ReadKey().Key;
+        }
 
-        //  in this function to get the key"
-            // is it spacebar? Yes? bulletfiring = true
 
         private void Move(ConsoleKey Key)
         {
@@ -78,8 +76,11 @@ namespace GameLab5
                     Console.Write(Sprite);
                     LastY = y;
                     break;
-                case ConsoleKey.Spacebar: //Take this and put into new function, then recall that function in main game loop
-                    playerBullet.fire(x, y);
+                case ConsoleKey.Spacebar: 
+                    if (!playerBullet.pBulletFiring)
+                    {
+                        playerBullet.SpawnBullet(x, y);                        
+                    }
                     break;
 
 
@@ -91,27 +92,46 @@ namespace GameLab5
     class Bullets
     {
         private const string bulletSprite = "-";
-        private int bulletSpeed = 100;
-        public void fire(int PlayerX, int PlayerY)
+        private int bulletSpeed = 10;
+        private int LastX, LastY;
+        private int bulletX;
+        public bool pBulletFiring;
+        
+
+        public void SpawnBullet(int PlayerX, int PlayerY)
         {
-            int LastX;
-            int bulletX = PlayerX + 1;
-            Console.SetCursorPosition(bulletX , PlayerY);
-            while (true)
-            {
-                Console.Write(bulletSprite);
-                Thread.Sleep(bulletSpeed);
-                LastX = bulletX;
+            pBulletFiring = true;
+            bulletX = PlayerX + 1;
+            Console.SetCursorPosition(bulletX, PlayerY);
+            Console.Write(bulletSprite);
+            LastX = bulletX;
+            LastY = PlayerY;
+            Task BulletMoving = moveBullet();
+            
+        }
+
+
+        
+        public async Task moveBullet()
+        {
+            
+            while (bulletX != Console.WindowWidth)
+            {                
                 bulletX++;
-                Console.SetCursorPosition(LastX, PlayerY);
+                Console.SetCursorPosition(bulletX, LastY);
+                Console.Write(bulletSprite);
+                Console.SetCursorPosition(LastX, LastY);
                 Console.Write(" ");
-                if (bulletX == Console.WindowWidth)
+                LastX = bulletX;
+                if (bulletX == Console.WindowWidth - 1)
                 {
-                    break;
+                    pBulletFiring = false;
+                    Console.Write(" ");
                 }
-                Console.SetCursorPosition(bulletX, PlayerY);
-                
+                await Task.Delay(bulletSpeed);
             }
+            
+            
         }
 
     }
