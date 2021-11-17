@@ -34,6 +34,10 @@ namespace GameLab5
 
         private void Move(ConsoleKey Key)
         {
+            if (playerBullet.pBulletFiring)
+            {
+                playerBullet.moveBullet();
+            }
 
             switch (Key)
             {
@@ -91,8 +95,9 @@ namespace GameLab5
     }
     class Bullets
     {
+        private DateTime startTime = DateTime.Now;
         private const string bulletSprite = "-";
-        private int bulletSpeed = 10;
+        private int bulletSpeed = 30;
         private int LastX, LastY;
         private int bulletX;
         public bool pBulletFiring;
@@ -106,32 +111,44 @@ namespace GameLab5
             Console.Write(bulletSprite);
             LastX = bulletX;
             LastY = PlayerY;
-            Task BulletMoving = moveBullet();
+            
             
         }
 
 
         
-        public async Task moveBullet()
+        public void moveBullet()
+        {
+            if (BulletTimer())
+                if (bulletX != Console.WindowWidth)
+                {                
+                    bulletX++;
+                    Console.SetCursorPosition(bulletX, LastY);
+                    Console.Write(bulletSprite);
+                    Console.SetCursorPosition(LastX, LastY);
+                    Console.Write(" ");
+                    LastX = bulletX;
+                    if (bulletX == Console.WindowWidth - 1)
+                    {
+                        pBulletFiring = false;
+                        Console.Write(" ");
+                    }
+                
+                }
+            
+            
+        }
+
+        private bool BulletTimer()
         {
             
-            while (bulletX != Console.WindowWidth)
-            {                
-                bulletX++;
-                Console.SetCursorPosition(bulletX, LastY);
-                Console.Write(bulletSprite);
-                Console.SetCursorPosition(LastX, LastY);
-                Console.Write(" ");
-                LastX = bulletX;
-                if (bulletX == Console.WindowWidth - 1)
-                {
-                    pBulletFiring = false;
-                    Console.Write(" ");
-                }
-                await Task.Delay(bulletSpeed);
+            DateTime timeElapsed = DateTime.Now;
+            if (timeElapsed >= startTime.AddMilliseconds(bulletSpeed))
+            {
+                startTime = DateTime.Now;
+                return true;
             }
-            
-            
+            return false;
         }
 
     }
