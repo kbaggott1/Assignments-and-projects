@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\2140455\\Desktop\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
+      "projectUniqueName": "C:\\Users\\2140455\\Documents\\github\\Assignments-and-projects-main\\Year1\\GameLab5\\GameLab5.csproj",
       "projectName": "GameLab5",
-      "projectPath": "C:\\Users\\2140455\\Desktop\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
+      "projectPath": "C:\\Users\\2140455\\Documents\\github\\Assignments-and-projects-main\\Year1\\GameLab5\\GameLab5.csproj",
       "packagesPath": "C:\\Users\\2140455\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\2140455\\Desktop\\Assignments-and-projects\\Year1\\GameLab5\\obj\\",
+      "outputPath": "C:\\Users\\2140455\\Documents\\github\\Assignments-and-projects-main\\Year1\\GameLab5\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

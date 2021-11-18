@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections;
+
 namespace GameLab5
 {
+
     class Controller
     {
         
@@ -32,7 +35,7 @@ namespace GameLab5
         }
 
 
-        private void Move(ConsoleKey Key)
+        private void Move(ConsoleKey Key) //Remove magic numbers
         {
             if (playerBullet.pBulletFiring)
             {
@@ -95,13 +98,14 @@ namespace GameLab5
     }
     class Bullets
     {
-        private DateTime startTime = DateTime.Now;
         private const string bulletSprite = "-";
         private int bulletSpeed = 30;
         private int LastX, LastY;
         private int bulletX;
         public bool pBulletFiring;
-        
+        stopwatch BulletTimer = new stopwatch();
+        Program Time = new Program();
+
 
         public void SpawnBullet(int PlayerX, int PlayerY)
         {
@@ -119,7 +123,7 @@ namespace GameLab5
         
         public void moveBullet()
         {
-            if (BulletTimer())
+            if (BulletTimer.isTimerDone(bulletSpeed))
                 if (bulletX != Console.WindowWidth)
                 {                
                     bulletX++;
@@ -139,18 +143,70 @@ namespace GameLab5
             
         }
 
-        private bool BulletTimer()
+
+
+    }
+    class Alien
+    {
+        private int x, y;
+        public int HP { get; set; }
+        public string sprite { get; set; }
+        public bool isDead { get; set; }
+
+        public Alien()
         {
-            
-            DateTime timeElapsed = DateTime.Now;
-            if (timeElapsed >= startTime.AddMilliseconds(bulletSpeed))
+            HP = 2;
+            sprite = "X";
+            isDead = false;
+        }
+
+
+    }
+
+    class Stages
+    {
+        bool startCalled = false;
+        ArrayList alienList = new ArrayList();
+        int currentLevel = 1;
+        public void Start()
+        {
+            if (!startCalled)
             {
-                startTime = DateTime.Now;
+                spawnAliens();
+            }
+            else
+                play();
+        }
+
+        private void spawnAliens()
+        {
+            Alien alien0 = new Alien();
+            Alien alien1 = new Alien();
+            Alien alien2 = new Alien();
+            Alien alien3 = new Alien();
+            alienList.Add(alien0);
+            alienList.Add(alien1);
+            alienList.Add(alien2);
+            alienList.Add(alien3);
+        }
+
+        private void play()
+        {
+
+        }
+    }
+    class stopwatch
+    {
+        DateTime initialTime = DateTime.Now;
+        public bool isTimerDone(int TimeInMili)
+        {
+            DateTime timeElapsed = DateTime.Now;
+            if (timeElapsed >= initialTime.AddMilliseconds(TimeInMili))
+            {
+                initialTime = DateTime.Now;
                 return true;
             }
             return false;
         }
-
     }
-
 }
