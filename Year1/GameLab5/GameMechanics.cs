@@ -163,38 +163,6 @@ namespace GameLab5
 
     }
 
-    class Stages
-    {
-        bool startCalled = false;
-        ArrayList alienList = new ArrayList();
-        int currentLevel = 1;
-        public void Start()
-        {
-            if (!startCalled)
-            {
-                spawnAliens();
-            }
-            else
-                play();
-        }
-
-        private void spawnAliens()
-        {
-            Alien alien0 = new Alien();
-            Alien alien1 = new Alien();
-            Alien alien2 = new Alien();
-            Alien alien3 = new Alien();
-            alienList.Add(alien0);
-            alienList.Add(alien1);
-            alienList.Add(alien2);
-            alienList.Add(alien3);
-        }
-
-        private void play()
-        {
-
-        }
-    }
     class stopwatch
     {
         DateTime initialTime = DateTime.Now;
