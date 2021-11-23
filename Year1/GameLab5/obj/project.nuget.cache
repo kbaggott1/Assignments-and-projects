@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "paUXvhXByD9p/aqZ6PARRV8jPbM+XLgcuAAz69dSMJVM7kxXz8mm2lyFAdNEcm9s/SDJDi18NpEC5TRP0EU0xw==",
+  "dgSpecHash": "TurcSxjBAoWauDKRueli6Db/NVpmTDzR8IdO3Tsws9Td3JXjp3DYTNLrtNqjPoveD7vXOjrIUZ/qeJjeLpPIDg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\2140455\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

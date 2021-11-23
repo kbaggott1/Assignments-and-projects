@@ -1,0 +1,15 @@
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\GameLab5.exe
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\GameLab5.deps.json
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\GameLab5.runtimeconfig.json
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\GameLab5.dll
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\ref\GameLab5.dll
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Debug\netcoreapp6.0\GameLab5.pdb
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.csproj.AssemblyReference.cache
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.AssemblyInfoInputs.cache
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.AssemblyInfo.cs
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.csproj.CoreCompileInputs.cache
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.dll
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\ref\GameLab5.dll
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.pdb
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\obj\Debug\netcoreapp6.0\GameLab5.genruntimeconfig.cache

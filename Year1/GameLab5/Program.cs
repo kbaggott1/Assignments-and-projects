@@ -11,12 +11,12 @@ namespace GameLab5
             bool gameover = false;
             Controller Player = new Controller();          
             Console.CursorVisible = false;
-
-
+            bool haveSpawned = false;
+            Alien[] aliens = new Alien[4];
             // draw "O" before loop and reset default x and y for player controller
             while (!gameover)
             {
-                playLevel(getLevel());
+                playLevel(getLevel(), haveSpawned, ref aliens);
                 Player.Controls();
             }
             
@@ -41,14 +41,30 @@ namespace GameLab5
             return LeveltoReturn;
         }
 
-        static void playLevel(int currentLevel)
+        static void playLevel(int currentLevel, bool haveSpawned, ref Alien[] aliens)
         {
+
             switch(currentLevel)
             {
                 case 1:
-                    
-                    break;
+                    if (!haveSpawned)
+                    {
+                        aliens[0].StartX = 10;
+                        aliens[0].StartY = 10;
+                        aliens[1].StartX = 12;
+                        aliens[1].StartY = 14;
+                        aliens[2].StartX = 16;
+                        aliens[2].StartY = 14;
 
+                        foreach (Alien a in aliens)
+                        {
+                            a.drawAlien();
+                        }
+
+                        haveSpawned = true; //***********end of level change this **********
+                    }
+                    break;
+                    
                 case 2:
 
                     break;

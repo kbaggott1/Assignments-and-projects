@@ -153,13 +153,28 @@ namespace GameLab5
         public string sprite { get; set; }
         public bool isDead { get; set; }
 
+        public int StartX
+        {
+            set { x = value; }
+        }
+        public int StartY
+        {
+            set { y = value; }
+        }
+
         public Alien()
         {
             HP = 2;
             sprite = "X";
             isDead = false;
+           
         }
 
+        public void drawAlien()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(sprite);
+        }
 
     }
 
