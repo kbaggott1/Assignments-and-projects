@@ -20,6 +20,17 @@ namespace GameLab5
             get { return sprite; }
         }
 
+        
+
+        public void DrawStart(int StartX, int StartY)
+        {
+            x = StartX;
+            y = StartY;
+            Console.SetCursorPosition(x, y);
+            Console.Write(sprite);
+            LastX = x;
+            LastY = y;
+        }
 
         public void Controls()  // looped in main
         {
