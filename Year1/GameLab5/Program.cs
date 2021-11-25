@@ -13,14 +13,14 @@ namespace GameLab5
             Controller Player = new Controller();          
             Console.CursorVisible = false;
             bool haveSpawned = false;
-            List<Alien> aliens = new List<Alien>();
+            List<Alien> alien = new List<Alien>();
 
 
-            Player.DrawStart(3, 13);
-            // draw "O" before loop and reset default x and y for player controller
+            Player.StartPos(3, 13);
+
             while (!gameover)
             {
-                playLevel(getLevel(), ref haveSpawned, ref aliens);
+                playLevel(getLevel(), ref haveSpawned, ref alien);
                 Player.Controls();
             }
             
@@ -28,7 +28,7 @@ namespace GameLab5
 
         }
 
-        static void saveLevel(int currentLevel)
+        static void gotoLevel(int currentLevel)
         {
             TextWriter save = new StreamWriter("save.txt");
             save.Flush();
@@ -54,19 +54,19 @@ namespace GameLab5
                 case 1:
                     if (!haveSpawned)
                     {
-                        Alien alien0 = new Alien();
-                        Alien alien1 = new Alien();
-                        Alien alien2 = new Alien();
-                        aliens.Add(alien0);
-                        aliens.Add(alien1);
-                        aliens.Add(alien2);
+                        aliens.Add(new Alien());
+                        aliens.Add(new Alien());
+                        aliens.Add(new Alien());
 
                         aliens[0].StartX = 10;
                         aliens[0].StartY = 10;
+
                         aliens[1].StartX = 12;
                         aliens[1].StartY = 12;
+
                         aliens[2].StartX = 14;
                         aliens[2].StartY = 14;
+
                         foreach (Alien a in aliens)
                         {
                             a.drawAlien();
@@ -74,15 +74,27 @@ namespace GameLab5
 
                         haveSpawned = true; //***********end of level change this **********
                     }
-                    else
+                    else //Where level loops
                     {
-                        foreach (Alien a in aliens)
+                        foreach (Alien a in aliens.ToArray())
                         {
                             if (a.isDead)
+                            {
                                 i++;
+                                aliens.Remove(a);
+                            }                               
+
                             if (i == aliens.Count)
-                                saveLevel(2);
+                            {
+                                gotoLevel(2);
+                                break;
+                            }                                                          
+                        }
+
+                        foreach (Alien a in aliens)
+                        {
                             
+                            a.attack();
                         }
                     }
                     break;

@@ -10,11 +10,19 @@ namespace GameLab5
 
     class Controller
     {
-        
+        //Player Position
         private const string sprite = "O";
         private int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
-        private Bullets playerBullet = new Bullets();
+        //Player Position
+
+
+        //Player Bullets
+        private int BulletCDinMili = 500;
+        private List<Bullets> playerBullet = new List<Bullets>();
+        stopwatch BulletCoolDown = new stopwatch();
+        //Player Bullets
+        
         public string Sprite
         {
             get { return sprite; }
@@ -22,7 +30,7 @@ namespace GameLab5
 
         
 
-        public void DrawStart(int StartX, int StartY)
+        public void StartPos(int StartX, int StartY)
         {
             x = StartX;
             y = StartY;
@@ -32,7 +40,7 @@ namespace GameLab5
             LastY = y;
         }
 
-        public void Controls()  // looped in main
+        public void Controls()
         {
             ConsoleKey userkey = ConsoleKey.NoName;            
             GetKey(ref userkey);
@@ -46,17 +54,28 @@ namespace GameLab5
         }
 
 
-        private void Move(ConsoleKey Key) //Remove magic numbers
+        private void Move(ConsoleKey Key) 
         {
-            if (playerBullet.pBulletFiring)
+            int maxX = 119;
+            int maxY = 29;
+
+            foreach (Bullets bullet in playerBullet.ToArray()) //need .ToArray otherwise values will change during enumeration I.E: error (:
             {
-                playerBullet.moveBullet();
+                if (bullet.pBulletFiring)
+                {
+                    bullet.moveBullet();
+                }
+                else
+                {
+                    playerBullet.Remove(bullet);
+                }
             }
+            
 
             switch (Key)
             {
                 case ConsoleKey.RightArrow:
-                    if (x < 119)
+                    if (x < maxX)
                         x++;
                     Console.SetCursorPosition(LastX, LastY);
                     Console.Write(" ");
@@ -86,7 +105,7 @@ namespace GameLab5
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (y < 120)
+                    if (y < maxY)
                         y++;
                     Console.SetCursorPosition(LastX, LastY);
                     Console.Write(" ");
@@ -95,12 +114,13 @@ namespace GameLab5
                     LastY = y;
                     break;
                 case ConsoleKey.Spacebar: 
-                    if (!playerBullet.pBulletFiring)
+                    if (BulletCoolDown.isTimerDone(BulletCDinMili))
                     {
-                        playerBullet.SpawnBullet(x, y);                        
+                        playerBullet.Add(new Bullets());
+                        playerBullet[playerBullet.Count - 1].SpawnBullet(x, y);
                     }
                     break;
-
+                    
 
             }
 
@@ -110,18 +130,20 @@ namespace GameLab5
     class Bullets
     {
         private const string bulletSprite = "-";
-        private int bulletSpeed = 30;
+        private int bulletSpeed = 15;      
         private int LastX, LastY;
         private int bulletX;
+        private int bulletY;
         public bool pBulletFiring;
         stopwatch BulletTimer = new stopwatch();
-        Program Time = new Program();
+        
 
 
         public void SpawnBullet(int PlayerX, int PlayerY)
         {
             pBulletFiring = true;
             bulletX = PlayerX + 1;
+            bulletY = PlayerY;
             Console.SetCursorPosition(bulletX, PlayerY);
             Console.Write(bulletSprite);
             LastX = bulletX;
@@ -147,14 +169,16 @@ namespace GameLab5
                     {
                         pBulletFiring = false;
                         Console.Write(" ");
-                    }
-                
+                    }   
+                    
                 }
-            
-            
+            BulletHit();
         }
 
+        public void BulletHit() //Figure out how to send all alien positions
+        {
 
+        }
 
     }
     class Alien
@@ -186,6 +210,13 @@ namespace GameLab5
             Console.SetCursorPosition(x, y);
             Console.Write(sprite);
         }
+
+        public void attack()
+        {
+
+        }
+
+
 
     }
 
