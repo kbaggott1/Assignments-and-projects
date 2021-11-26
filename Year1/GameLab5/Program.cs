@@ -15,14 +15,22 @@ namespace GameLab5
             bool haveSpawned = false;
             List<Alien> aliens = new List<Alien>();
             int deathCounter = 0;
+            //int score = 0;
+            int level = getLevel(); //If i dont put getLevel() in a variable than the GC has to work constantly, I doubt thats good but idk
 
+            Console.SetCursorPosition(0, 1);
+            for (int i = 0; i < Console.WindowWidth; i++)
+            {
+                Console.Write("_");
+            }
 
-
-            Player.StartPos(3, 13);
+            Player.StartPos(3, 15);
 
             while (!gameover)
             {
-                playLevel(getLevel(), ref haveSpawned, ref aliens, ref deathCounter);
+                if (!haveSpawned)
+                    level = getLevel();
+                playLevel(level, ref haveSpawned, ref aliens, ref deathCounter);
                 Player.Controls();
                 Player.SendAliens(aliens);
             }
@@ -48,7 +56,7 @@ namespace GameLab5
 
         static void playLevel(int currentLevel, ref bool haveSpawned, ref List<Alien> aliens, ref int deathCounter)
         {           
-            int LvlAlienCount;
+            int LvlAlienCount;  
 
             switch(currentLevel)
             {
@@ -60,14 +68,14 @@ namespace GameLab5
                         aliens.Add(new Alien());
                         aliens.Add(new Alien());
 
-                        aliens[0].x = 10; //THESE NEED TO BE CHANGED
-                        aliens[0].y = 10;
+                        aliens[0].x = 60; //THESE NEED TO BE CHANGED
+                        aliens[0].y = 7;
 
-                        aliens[1].x = 12;
-                        aliens[1].y = 12;
+                        aliens[1].x = 50;
+                        aliens[1].y = 15;
 
-                        aliens[2].x = 14;
-                        aliens[2].y = 14;
+                        aliens[2].x = 60;
+                        aliens[2].y = 23;
 
                         foreach (Alien a in aliens)
                         {
@@ -103,8 +111,7 @@ namespace GameLab5
                         }
 
                         foreach (Alien a in aliens)
-                        {
-                            
+                        {                            
                             a.attack();
                         }
                     }
