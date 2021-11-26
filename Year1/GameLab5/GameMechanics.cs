@@ -10,24 +10,34 @@ namespace GameLab5
 
     class Controller
     {
-        //Player Position
+        //Player Position-------------------
         private const string sprite = "O";
         private int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
-        //Player Position
+        //----------------------------------
 
 
-        //Player Bullets
-        private int BulletCDinMili = 500;
+        //Player Bullets------------------------------------------
+        private int BulletCDinMili = 250;
         private List<Bullets> playerBullet = new List<Bullets>();
         stopwatch BulletCoolDown = new stopwatch();
-        //Player Bullets
-        
+        //--------------------------------------------------------
+
+
+        //alien storage for hit detection
+        private List<Alien> aliens;
+        //-------------------------------
+
+
         public string Sprite
         {
             get { return sprite; }
         }
 
+        public void SendAliens(List<Alien> alienList)
+        {
+            aliens = alienList;
+        }
         
 
         public void StartPos(int StartX, int StartY)
@@ -63,7 +73,7 @@ namespace GameLab5
             {
                 if (bullet.pBulletFiring)
                 {
-                    bullet.moveBullet();
+                    bullet.moveBullet(aliens);
                 }
                 else
                 {
@@ -154,7 +164,7 @@ namespace GameLab5
 
 
         
-        public void moveBullet()
+        public void moveBullet(List<Alien> Aliens)
         {
             if (BulletTimer.isTimerDone(bulletSpeed))
                 if (bulletX != Console.WindowWidth)
@@ -170,32 +180,49 @@ namespace GameLab5
                         pBulletFiring = false;
                         Console.Write(" ");
                     }   
+                    foreach (Alien Alien in Aliens.ToArray())
+                    {
+                        if (bulletX == Alien.x && bulletY == Alien.y)
+                        {
+                            Alien.HP--;
+                            pBulletFiring = false;
+                            Console.Write(" ");
+                        }
+                    }
                     
                 }
-            BulletHit();
-        }
-
-        public void BulletHit() //Figure out how to send all alien positions
-        {
-
         }
 
     }
     class Alien
     {
-        private int x, y;
-        public int HP { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        private int hp;
+        public int HP
+        {
+            get { return hp; }
+            set
+            {
+                hp = value;
+                if (hp == 1)
+                    sprite = "x";
+                else
+                    if (hp < 1)
+                        isDead = true;
+            }
+        }
         public string sprite { get; set; }
         public bool isDead { get; set; }
 
-        public int StartX
-        {
-            set { x = value; }
-        }
-        public int StartY
-        {
-            set { y = value; }
-        }
+        //public int StartX
+        //{
+        //    set { x = value; }
+        //}
+        //public int StartY
+        //{
+        //    set { y = value; }
+        //}
 
         public Alien()
         {
