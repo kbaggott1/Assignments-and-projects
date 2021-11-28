@@ -328,17 +328,29 @@ namespace GameLab5
         private string BulletSprite = "~";
         private int BulletX;
         private int BulletY;
-        private int AlienBulletCooldown = 500;
+        private int LastX;
+        private int LastY;
+        private int AlienBulletCooldown = 250;
 
         public bool isFiring = false;
         private bool hasSpawned = false;
         private stopwatch bTimer = new stopwatch();
                 
+        public void spawnBullet(int AlienX, int AlienY)
+        {
+            BulletX = AlienX - 1;
+            BulletY = AlienY;
+            LastX = BulletX;
+            LastY = BulletY;
+            Console.SetCursorPosition(BulletX, BulletY);
+            Console.Write(BulletSprite);
+        }
         public void MoveBullet(int AlienX, int AlienY)
         {
             if (bTimer.isTimerDone(AlienBulletCooldown))
             {
-
+                BulletX--;
+                
             }
         }
 
