@@ -9,13 +9,16 @@ namespace GameLab5
 
         static void Main(string[] args)
         {
+            //Score Idea: Score goes down everytime you miss an alien
+
             bool gameover = false;
             Controller Player = new Controller();          
             Console.CursorVisible = false;
             bool haveSpawned = false;
             List<Alien> aliens = new List<Alien>();
-            int deathCounter = 0;
-            //int score = 0;
+
+            int alienDeathCounter = 0;
+            int score = 0;
             int level = getLevel(); //If i dont put getLevel() in a variable than the GC has to work constantly, I doubt thats good but idk
 
             Console.SetCursorPosition(0, 1);
@@ -25,14 +28,16 @@ namespace GameLab5
             }
 
             Player.StartPos(3, 15);
+            updateHeader(level, score, Player.Lives);
 
             while (!gameover)
             {
                 if (!haveSpawned)
                     level = getLevel();
-                playLevel(level, ref haveSpawned, ref aliens, ref deathCounter);
+                playLevel(level, ref haveSpawned, ref aliens, ref alienDeathCounter);
                 Player.Controls();
                 Player.SendAliens(aliens);
+                
             }
             
         }
@@ -127,5 +132,14 @@ namespace GameLab5
             }
         }
 
+        public static void updateHeader(int Level, int score, int lives)
+        {
+            Console.SetCursorPosition(10, 0);
+            Console.Write("Level: " + Level);
+            Console.SetCursorPosition(55, 0);
+            Console.Write("Score: " + score);
+            Console.SetCursorPosition(100, 0);
+            Console.Write("Lives: " + lives);
+        }
     }
 }

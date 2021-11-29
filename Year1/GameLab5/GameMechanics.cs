@@ -14,6 +14,8 @@ namespace GameLab5
         private const string sprite = "O";
         private int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
+        private int lives = 3; 
+        public int Lives { get { return lives; } set { lives = value; } }
         //----------------------------------
 
 
@@ -115,12 +117,8 @@ namespace GameLab5
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (y < maxY && checkAlienPosDown(aliens, x, y)) 
-                    {
-                        y++;
-                    }
-
-                        
+                    if (y < maxY && checkAlienPosDown(aliens, x, y))                    
+                        y++;                                         
                     Console.SetCursorPosition(LastX, LastY);
                     Console.Write(" ");
                     Console.SetCursorPosition(x, y);
@@ -284,7 +282,8 @@ namespace GameLab5
         }
         public string sprite { get; set; }
         public bool isDead { get; set; }
-        private bool isFiring = false;
+        
+
 
         //public int StartX
         //{
@@ -313,8 +312,13 @@ namespace GameLab5
         {
             if (Bullet.isFiring)
             {
-                Bullet.MoveBullet(x, y);
+                Bullet.MoveBullet();
             }
+            else
+            {
+                Bullet.spawnBullet(x, y);
+            }
+               
 
         }
 
@@ -344,12 +348,20 @@ namespace GameLab5
             LastY = BulletY;
             Console.SetCursorPosition(BulletX, BulletY);
             Console.Write(BulletSprite);
+            isFiring = true;
         }
-        public void MoveBullet(int AlienX, int AlienY)
+        public void MoveBullet()
         {
             if (bTimer.isTimerDone(AlienBulletCooldown))
             {
                 BulletX--;
+                Console.SetCursorPosition(BulletX, BulletY);
+                Console.Write(BulletSprite);
+                Console.SetCursorPosition(LastX, LastY);
+                Console.Write(" ");
+                LastX = BulletX;
+                LastY = BulletY;
+
                 
             }
         }
