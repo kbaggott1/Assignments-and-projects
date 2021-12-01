@@ -6,18 +6,17 @@ namespace GameLab5
 {
     class Program
     {
-
+        static Controller Player = new Controller();
         static void Main(string[] args)
         {
             //Score Idea: Score goes down everytime you miss an alien
 
-            bool gameover = false;
-            Controller Player = new Controller();          
+            bool gameover = false;        
             Console.CursorVisible = false;
             bool haveSpawned = false;
             List<Alien> aliens = new List<Alien>();
 
-            int alienDeathCounter = 0;
+
             int score = 0;
             int level = getLevel(); //If i dont put getLevel() in a variable than the GC has to work constantly, I doubt thats good but idk
 
@@ -28,16 +27,19 @@ namespace GameLab5
             }
 
             Player.StartPos(3, 15);
-            updateHeader(level, score, Player.Lives);
+            
 
             while (!gameover)
             {
                 if (!haveSpawned)
                     level = getLevel();
-                playLevel(level, ref haveSpawned, ref aliens, ref alienDeathCounter);
+                updateHeader(level, score, Player.Lives);
+                playLevel(level, ref haveSpawned, ref aliens);
                 Player.Controls();
                 Player.SendAliens(aliens);
-                
+                if (Player.Lives < 1)
+                    gameover = true;
+                                              
             }
             
         }
@@ -59,9 +61,10 @@ namespace GameLab5
             return LeveltoReturn;
         }
 
-        static void playLevel(int currentLevel, ref bool haveSpawned, ref List<Alien> aliens, ref int deathCounter)
+        static void playLevel(int currentLevel, ref bool haveSpawned, ref List<Alien> aliens)
         {           
-            int LvlAlienCount;  
+            int LvlAlienCount;
+            int deathCounter = 0;
 
             switch(currentLevel)
             {
@@ -92,12 +95,11 @@ namespace GameLab5
                     }
                     else //Where level loops
                     {
-                        foreach (Alien a in aliens.ToArray())
+                        foreach (Alien a in aliens)
                         {
                             if (a.isDead)
                             {
                                 deathCounter++;
-                                aliens.Remove(a);
                             }
                             else //This else is essential to erase dead
                             {
@@ -109,6 +111,12 @@ namespace GameLab5
                                 deathCounter = 0;
                                 //gotoLevel(2);
                                 //haveSpawned = false;
+
+                                foreach(Alien alien in aliens.ToArray())
+                                {
+                                    aliens.Remove(alien);
+                                }
+
                                 Console.SetCursorPosition(0, 0);
                                 Console.Write("Level complete (placeholder text)");
                                 break;
@@ -117,7 +125,9 @@ namespace GameLab5
 
                         foreach (Alien a in aliens)
                         {                            
-                            a.attack();
+                            if (a.attack(Player.x, Player.y))                            
+                                Player.Lives--;
+                            
                         }
                     }
                     break;

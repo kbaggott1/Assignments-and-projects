@@ -12,7 +12,7 @@ namespace GameLab5
     {
         //Player Position-------------------
         private const string sprite = "O";
-        private int x = 0, y = 0;
+        public int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
         private int lives = 3; 
         public int Lives { get { return lives; } set { lives = value; } }
@@ -258,12 +258,13 @@ namespace GameLab5
                     }
                     
                 }
+            
         }
 
     }
     class Alien
     {
-        private AlienBullets Bullet = new AlienBullets();
+        private AlienBullets Bullet = new AlienBullets(); //zthis needs to be outisde the object or each will have their own list 
         public int x { get; set; }
         public int y { get; set; }
         private int hp;
@@ -281,8 +282,24 @@ namespace GameLab5
             }
         }
         public string sprite { get; set; }
-        public bool isDead { get; set; }
+        private bool CanFire = true;
+
+        private bool IsDead = false;
+        public bool isDead
+        {
+            get { return IsDead; }
+            set
+            {
+                IsDead = value;
+                if (value)
+                    CanFire = false;
+            }
+        }
+
+
+
         
+       
 
 
         //public int StartX
@@ -299,7 +316,7 @@ namespace GameLab5
             HP = 2;
             sprite = "X";
             isDead = false;
-           
+                        
         }
 
         public void drawAlien()
@@ -308,17 +325,22 @@ namespace GameLab5
             Console.Write(sprite);
         }
 
-        public void attack()
+        public bool attack(int PlayerX, int PlayerY)
         {
+
             if (Bullet.isFiring)
             {
-                Bullet.MoveBullet();
+                Bullet.MoveBullet(PlayerX, PlayerY);
+                if (Bullet.PlayerHit)
+                    return true;
             }
             else
             {
-                Bullet.spawnBullet(x, y);
+                if (CanFire)
+                    Bullet.spawnBullet(x, y);
             }
-               
+            return false;
+          
 
         }
 
@@ -334,11 +356,13 @@ namespace GameLab5
         private int BulletY;
         private int LastX;
         private int LastY;
-        private int AlienBulletCooldown = 250;
+        private int AlienBulletCooldown = 50;
 
         public bool isFiring = false;
-        private bool hasSpawned = false;
+        //private bool hasSpawned = false;
         private stopwatch bTimer = new stopwatch();
+
+        public bool PlayerHit;
                 
         public void spawnBullet(int AlienX, int AlienY)
         {
@@ -349,20 +373,38 @@ namespace GameLab5
             Console.SetCursorPosition(BulletX, BulletY);
             Console.Write(BulletSprite);
             isFiring = true;
+            PlayerHit = false;
         }
-        public void MoveBullet()
+        public void MoveBullet(int PlayerX, int PlayerY)
         {
-            if (bTimer.isTimerDone(AlienBulletCooldown))
+            if (BulletX > 1)
             {
-                BulletX--;
-                Console.SetCursorPosition(BulletX, BulletY);
-                Console.Write(BulletSprite);
+                if (bTimer.isTimerDone(AlienBulletCooldown))
+                {
+                    if (BulletX == (PlayerX + 1) && BulletY == PlayerY)
+                    {
+                        isFiring = false;
+                        PlayerHit = true;
+                        Console.SetCursorPosition(LastX, LastY);
+                        Console.Write(" ");
+                        return;
+                    }
+                    BulletX--;
+                    Console.SetCursorPosition(BulletX, BulletY);
+                    Console.Write(BulletSprite);
+                    Console.SetCursorPosition(LastX, LastY);
+                    Console.Write(" ");
+                    LastX = BulletX;
+                    LastY = BulletY;
+
+
+                }
+            }
+            else
+            {
+                isFiring = false;
                 Console.SetCursorPosition(LastX, LastY);
                 Console.Write(" ");
-                LastX = BulletX;
-                LastY = BulletY;
-
-                
             }
         }
 
