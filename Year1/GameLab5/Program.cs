@@ -125,8 +125,12 @@ namespace GameLab5
 
                         foreach (Alien a in aliens)
                         {                            
-                            if (a.attack(Player.x, Player.y))                            
+                            if (a.attack(Player.x, Player.y))
+                            {
                                 Player.Lives--;
+                                Player.Redraw();
+                            }                            
+                                
                             
                         }
                     }

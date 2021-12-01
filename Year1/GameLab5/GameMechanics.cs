@@ -31,6 +31,7 @@ namespace GameLab5
         //-------------------------------
 
 
+
         public string Sprite
         {
             get { return sprite; }
@@ -50,6 +51,12 @@ namespace GameLab5
             Console.Write(sprite);
             LastX = x;
             LastY = y;
+        }
+
+        public void Redraw()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(Sprite);
         }
 
         public void Controls()
@@ -381,7 +388,7 @@ namespace GameLab5
             {
                 if (bTimer.isTimerDone(AlienBulletCooldown))
                 {
-                    if (BulletX == (PlayerX + 1) && BulletY == PlayerY)
+                    if (BulletX == PlayerX && BulletY == PlayerY)
                     {
                         isFiring = false;
                         PlayerHit = true;
