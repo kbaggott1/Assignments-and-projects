@@ -101,7 +101,7 @@ namespace GameLab5
                             {
                                 deathCounter++;
                             }
-                            else //This else is essential to erase dead
+                            else 
                             {
                                 a.drawAlien();
                             }
@@ -109,6 +109,7 @@ namespace GameLab5
                             if (deathCounter == LvlAlienCount)
                             {
                                 deathCounter = 0;
+                                
                                 //gotoLevel(2);
                                 //haveSpawned = false;
 
@@ -116,9 +117,8 @@ namespace GameLab5
                                 {
                                     aliens.Remove(alien);
                                 }
-
                                 Console.SetCursorPosition(0, 0);
-                                Console.Write("Level complete (placeholder text)");
+                                Console.Write("Level complete (placeholder text)"); //Replace this with maybe blinkining level two
                                 break;
                             }                                                          
                         }
