@@ -26,7 +26,7 @@ namespace GameLab5
                 Console.Write("_");
             }
 
-            Player.StartPos(3, 15);
+            Player.StartPos(10, 15);
             
 
             while (!gameover)

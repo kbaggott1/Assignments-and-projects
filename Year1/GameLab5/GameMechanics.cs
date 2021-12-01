@@ -11,7 +11,7 @@ namespace GameLab5
     class Controller
     {
         //Player Position-------------------
-        private const string sprite = "O";
+        private const string sprite = "►";
         public int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
         private int lives = 3; 
@@ -78,7 +78,7 @@ namespace GameLab5
             int maxX = 119;
             int maxY = 29;
 
-            foreach (Bullets bullet in playerBullet.ToArray()) //need .ToArray otherwise values will change during enumeration I.E: error (:
+            foreach (Bullets bullet in playerBullet.ToArray()) //need .ToArray otherwise values will change during enumeration I.E: error :)
             {
                 if (bullet.pBulletFiring)
                 {
