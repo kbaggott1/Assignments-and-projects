@@ -14,7 +14,8 @@ namespace GameLab5
         private const string sprite = "►";
         public int x = 0, y = 0;
         private int LastX = 0, LastY = 0;
-        private int lives = 3; 
+        private int lives = 3;
+        private int score = 0;
         public int Lives { get { return lives; } set { lives = value; } }
         //----------------------------------
 
@@ -59,11 +60,11 @@ namespace GameLab5
             Console.Write(Sprite);
         }
 
-        public void Controls()
+        public void Controls(ref int gamescore)
         {
             ConsoleKey userkey = ConsoleKey.NoName;            
             GetKey(ref userkey);
-            Move(userkey);
+            Move(userkey, ref gamescore);
         }
 
         private void GetKey(ref ConsoleKey userkey)
@@ -73,7 +74,7 @@ namespace GameLab5
         }
 
 
-        private void Move(ConsoleKey Key) 
+        private void Move(ConsoleKey Key, ref int score) 
         {
             int maxX = 119;
             int maxY = 29;
@@ -82,7 +83,7 @@ namespace GameLab5
             {
                 if (bullet.pBulletFiring)
                 {
-                    bullet.moveBullet(aliens);
+                    bullet.moveBullet(aliens, ref score);
                 }
                 else
                 {
@@ -238,7 +239,7 @@ namespace GameLab5
 
 
         
-        public void moveBullet(List<Alien> Aliens)
+        public void moveBullet(List<Alien> Aliens, ref int score)
         {
             if (BulletTimer.isTimerDone(bulletSpeed))
                 if (bulletX != Console.WindowWidth)
@@ -253,14 +254,21 @@ namespace GameLab5
                     {
                         pBulletFiring = false;
                         Console.Write(" ");
+                        if (score != 0)
+                            score = score - 5;
                     }   
                     foreach (Alien Alien in Aliens.ToArray())
                     {
                         if (bulletX == Alien.x && bulletY == Alien.y)
-                        {
-                            Alien.HP--;
-                            pBulletFiring = false;
-                            Console.Write(" ");
+                        {                           
+                            if (!Alien.isDead)
+                            {
+                                Alien.HP--;
+                                pBulletFiring = false;
+                                Console.Write(" ");
+                                score = score + 5;
+                            }
+
                         }
                     }
                     
@@ -272,9 +280,11 @@ namespace GameLab5
     class Alien
     {
         private AlienBullets Bullet = new AlienBullets(); //zthis needs to be outisde the object or each will have their own list 
+
         public int x { get; set; }
         public int y { get; set; }
         private int hp;
+        private int TargetX, TargetY;
         public int HP
         {
             get { return hp; }
@@ -337,14 +347,19 @@ namespace GameLab5
 
             if (Bullet.isFiring)
             {
-                Bullet.MoveBullet(PlayerX, PlayerY);
+                Bullet.MoveBullet(PlayerX, PlayerY, TargetX, TargetY);
                 if (Bullet.PlayerHit)
                     return true;
             }
             else
             {
                 if (CanFire)
+                {
                     Bullet.spawnBullet(x, y);
+                    TargetX = PlayerX;
+                    TargetY = PlayerY;
+                }
+                    
             }
             return false;
           
@@ -368,6 +383,7 @@ namespace GameLab5
         public bool isFiring = false;
         //private bool hasSpawned = false;
         private stopwatch bTimer = new stopwatch();
+        private stopwatch TargetTimer = new stopwatch();
 
         public bool PlayerHit;
                 
@@ -382,7 +398,7 @@ namespace GameLab5
             isFiring = true;
             PlayerHit = false;
         }
-        public void MoveBullet(int PlayerX, int PlayerY)
+        public void MoveBullet(int PlayerX, int PlayerY, int TargetX, int TargetY)
         {
             if (BulletX > 1)
             {
@@ -396,7 +412,17 @@ namespace GameLab5
                         Console.Write(" ");
                         return;
                     }
+                    //Bullet behaviour:
+                    if (BulletY != TargetY)
+                        if (TargetTimer.isTimerDone(500))
+                            if (TargetY < BulletY)
+                                BulletY--;
+                        else
+
+                            BulletY++;
                     BulletX--;
+
+                    //
                     Console.SetCursorPosition(BulletX, BulletY);
                     Console.Write(BulletSprite);
                     Console.SetCursorPosition(LastX, LastY);

@@ -18,6 +18,7 @@ namespace GameLab5
 
 
             int score = 0;
+            int oldScore = 0;
             int level = getLevel(); //If i dont put getLevel() in a variable than the GC has to work constantly, I doubt thats good but idk
 
             Console.SetCursorPosition(0, 1);
@@ -33,9 +34,9 @@ namespace GameLab5
             {
                 if (!haveSpawned)
                     level = getLevel();
-                updateHeader(level, score, Player.Lives);
+                updateHeader(level, score, ref oldScore, Player.Lives);
                 playLevel(level, ref haveSpawned, ref aliens);
-                Player.Controls();
+                Player.Controls(ref score);
                 Player.SendAliens(aliens);
                 if (Player.Lives < 1)
                     gameover = true;
@@ -62,11 +63,15 @@ namespace GameLab5
         }
 
         static void playLevel(int currentLevel, ref bool haveSpawned, ref List<Alien> aliens)
-        {           
+        {
             int LvlAlienCount;
             int deathCounter = 0;
+            int MinXSpawn = 30;
+            int MinYSpawn = 5;
+            Random pos = new Random();
+            stopwatch shoot = new stopwatch(); 
 
-            switch(currentLevel)
+            switch (currentLevel)
             {
                 case 1:
                     LvlAlienCount = 3;
@@ -76,14 +81,14 @@ namespace GameLab5
                         aliens.Add(new Alien());
                         aliens.Add(new Alien());
 
-                        aliens[0].x = 60; //THESE NEED TO BE CHANGED
-                        aliens[0].y = 7;
+                        aliens[0].x = pos.Next(MinXSpawn, WindowWidth - 1); //THESE NEED TO BE CHANGED
+                        aliens[0].y = pos.Next(MinYSpawn, 10);
 
-                        aliens[1].x = 50;
-                        aliens[1].y = 15;
+                        aliens[1].x = pos.Next(MinXSpawn, WindowWidth - 1);
+                        aliens[1].y = pos.Next(11, 20);
 
-                        aliens[2].x = 60;
-                        aliens[2].y = 23;
+                        aliens[2].x = pos.Next(MinXSpawn, WindowWidth - 1);
+                        aliens[2].y = pos.Next(21, 29);
 
                         foreach (Alien a in aliens)
                         {
@@ -123,14 +128,16 @@ namespace GameLab5
                             }                                                          
                         }
 
+
                         foreach (Alien a in aliens)
-                        {                            
+                        {
+
                             if (a.attack(Player.x, Player.y))
                             {
                                 Player.Lives--;
                                 Player.Redraw();
-                            }                            
-                                
+                            }
+
                             
                         }
                     }
@@ -146,12 +153,24 @@ namespace GameLab5
             }
         }
 
-        public static void updateHeader(int Level, int score, int lives)
+        public static void updateHeader(int Level, int score, ref int oldScore, int lives)
         {
             Console.SetCursorPosition(10, 0);
             Console.Write("Level: " + Level);
+
+            if (score != oldScore)
+            {
+                for (int i = 62; i < 65; i++)
+                {
+                    Console.SetCursorPosition(i, 0);
+                    Console.Write(" ");
+                }
+                oldScore = score;
+            }
+
             Console.SetCursorPosition(55, 0);
             Console.Write("Score: " + score);
+
             Console.SetCursorPosition(100, 0);
             Console.Write("Lives: " + lives);
         }
