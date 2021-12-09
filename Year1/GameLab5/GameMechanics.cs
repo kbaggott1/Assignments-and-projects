@@ -255,7 +255,7 @@ namespace GameLab5
                         pBulletFiring = false;
                         Console.Write(" ");
                         if (score != 0)
-                            score = score - 5;
+                            score = score - 1;
                     }   
                     foreach (Alien Alien in Aliens.ToArray())
                     {
