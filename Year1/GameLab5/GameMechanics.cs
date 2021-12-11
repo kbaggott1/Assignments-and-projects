@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections;
+using NAudio.Wave;
 
 namespace GameLab5
 {
@@ -42,7 +43,7 @@ namespace GameLab5
         {
             aliens = alienList;
         }
-        
+
 
         public void StartPos(int StartX, int StartY)
         {
@@ -62,7 +63,7 @@ namespace GameLab5
 
         public void Controls(ref int gamescore)
         {
-            ConsoleKey userkey = ConsoleKey.NoName;            
+            ConsoleKey userkey = ConsoleKey.NoName;
             GetKey(ref userkey);
             Move(userkey, ref gamescore);
         }
@@ -74,7 +75,7 @@ namespace GameLab5
         }
 
 
-        private void Move(ConsoleKey Key, ref int score) 
+        private void Move(ConsoleKey Key, ref int score)
         {
             int maxX = 119;
             int maxY = 29;
@@ -90,7 +91,7 @@ namespace GameLab5
                     playerBullet.Remove(bullet);
                 }
             }
-            
+
 
             switch (Key)
             {
@@ -105,7 +106,7 @@ namespace GameLab5
                     break;
 
                 case ConsoleKey.LeftArrow:
-                    if (x > 0  && checkAlienPosLeft(aliens, x, y))
+                    if (x > 0 && checkAlienPosLeft(aliens, x, y))
                         x--;
                     Console.SetCursorPosition(LastX, LastY);
                     Console.Write(" ");
@@ -125,8 +126,8 @@ namespace GameLab5
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (y < maxY && checkAlienPosDown(aliens, x, y))                    
-                        y++;                                         
+                    if (y < maxY && checkAlienPosDown(aliens, x, y))
+                        y++;
                     Console.SetCursorPosition(LastX, LastY);
                     Console.Write(" ");
                     Console.SetCursorPosition(x, y);
@@ -134,19 +135,19 @@ namespace GameLab5
                     LastY = y;
                     break;
 
-                case ConsoleKey.Spacebar: 
+                case ConsoleKey.Spacebar:
                     if (BulletCoolDown.isTimerDone(BulletCDinMili))
                     {
                         playerBullet.Add(new Bullets());
                         playerBullet[playerBullet.Count - 1].SpawnBullet(x, y);
                     }
                     break;
-                    
+
 
             }
 
         }
-        private bool checkAlienPosDown(List<Alien> aliens, int PlayerX, int PlayerY) 
+        private bool checkAlienPosDown(List<Alien> aliens, int PlayerX, int PlayerY)
         {
             int alientemppos;
 
@@ -155,14 +156,14 @@ namespace GameLab5
                 alientemppos = alien.y;
                 if (PlayerX == alien.x && PlayerY == alientemppos - 1)
                 {
-                    
+
                     return false;
                 }
             }
             return true;
         }
 
-        private bool checkAlienPosUp(List<Alien> aliens, int PlayerX, int PlayerY) 
+        private bool checkAlienPosUp(List<Alien> aliens, int PlayerX, int PlayerY)
         {
             int alientemppos;
 
@@ -178,7 +179,7 @@ namespace GameLab5
             return true;
         }
 
-        private bool checkAlienPosRight(List<Alien> aliens, int PlayerX, int PlayerY) 
+        private bool checkAlienPosRight(List<Alien> aliens, int PlayerX, int PlayerY)
         {
             int alientemppos;
 
@@ -194,7 +195,7 @@ namespace GameLab5
             return true;
         }
 
-        private bool checkAlienPosLeft(List<Alien> aliens, int PlayerX, int PlayerY) 
+        private bool checkAlienPosLeft(List<Alien> aliens, int PlayerX, int PlayerY)
         {
             int alientemppos;
 
@@ -215,13 +216,13 @@ namespace GameLab5
     class Bullets
     {
         private const string bulletSprite = "-";
-        private int bulletSpeed = 15;      
+        private int bulletSpeed = 15;
         private int LastX, LastY;
         private int bulletX;
         private int bulletY;
         public bool pBulletFiring;
         stopwatch BulletTimer = new stopwatch();
-        
+
 
 
         public void SpawnBullet(int PlayerX, int PlayerY)
@@ -233,17 +234,17 @@ namespace GameLab5
             Console.Write(bulletSprite);
             LastX = bulletX;
             LastY = PlayerY;
-            
-            
+
+
         }
 
 
-        
+
         public void moveBullet(List<Alien> Aliens, ref int score)
         {
             if (BulletTimer.isTimerDone(bulletSpeed))
                 if (bulletX != Console.WindowWidth)
-                {                
+                {
                     bulletX++;
                     Console.SetCursorPosition(bulletX, LastY);
                     Console.Write(bulletSprite);
@@ -256,11 +257,11 @@ namespace GameLab5
                         Console.Write(" ");
                         if (score != 0)
                             score = score - 1;
-                    }   
+                    }
                     foreach (Alien Alien in Aliens.ToArray())
                     {
                         if (bulletX == Alien.x && bulletY == Alien.y)
-                        {                           
+                        {
                             if (!Alien.isDead)
                             {
                                 Alien.HP--;
@@ -271,9 +272,9 @@ namespace GameLab5
 
                         }
                     }
-                    
+
                 }
-            
+
         }
 
     }
@@ -300,7 +301,7 @@ namespace GameLab5
                     sprite = "x";
                 else
                     if (hp < 1)
-                        isDead = true;
+                    isDead = true;
             }
         }
         public string sprite { get; set; }
@@ -320,8 +321,8 @@ namespace GameLab5
 
 
 
-        
-       
+
+
 
 
         //public int StartX
@@ -338,7 +339,7 @@ namespace GameLab5
             HP = 2;
             sprite = "X";
             isDead = false;
-                        
+
         }
 
         public void drawAlien()
@@ -364,10 +365,10 @@ namespace GameLab5
                     TargetX = PlayerX;
                     TargetY = PlayerY;
                 }
-                    
+
             }
             return false;
-          
+
 
         }
 
@@ -393,7 +394,7 @@ namespace GameLab5
         private stopwatch TargetTimer = new stopwatch();
 
         public bool PlayerHit;
-                
+
         public void spawnBullet(int AlienX, int AlienY)
         {
             BulletX = AlienX - 1;
@@ -424,9 +425,9 @@ namespace GameLab5
                         if (TargetTimer.isTimerDone(AlienBulletSpeed * 10))
                             if (TargetY < BulletY)
                                 BulletY--;
-                        else
+                            else
 
-                            BulletY++;
+                                BulletY++;
                     BulletX--;
 
                     //
@@ -464,4 +465,5 @@ namespace GameLab5
             return false;
         }
     }
+
 }

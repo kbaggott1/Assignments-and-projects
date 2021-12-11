@@ -16,6 +16,7 @@ namespace GameLab5
         static int EndlessCounter = 50;
         static WaveOutEvent waveOut = new WaveOutEvent();
         static WaveFileReader song = new WaveFileReader("./Resources/Chiptune_Frontiers.wav");
+
         static void Main(string[] args)
         {
             CursorVisible = false;
@@ -23,16 +24,13 @@ namespace GameLab5
             Random RandomPos = new Random();
             bool MenuHasSpawned = false;
             int Selection = 0;
-
-
             waveOut.Init(song);
-            waveOut.Volume = 0.1F;
             waveOut.Play();
+
 
             while (flag)
             {
-                if (waveOut.PlaybackState == PlaybackState.Stopped)
-                    waveOut.Play();
+                
                 if (!MenuHasSpawned)
                 {
                     Selection = 0;
@@ -93,7 +91,7 @@ namespace GameLab5
                 int[] MainMenuPos = new int[] { 17, 19, 21, 23 };
                 bool enter = false;
                 enter = MenuNavController(ref Selection, MainMenu, MainMenuPos);
-                
+
                 if (enter)
                 {
                     switch (Selection)
@@ -191,7 +189,7 @@ namespace GameLab5
             {
                 if (i == 0)
                     Console.ForegroundColor = ConsoleColor.White;
-                else 
+                else
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.SetCursorPosition(53, LoadMenuPos[i]);
                 if (LoadMenu[i] == "")
@@ -199,8 +197,8 @@ namespace GameLab5
                 else
                     if (i == 0)
                     Console.Write(LoadMenu[i] + " HighScore: " + levels[i].LastChild.InnerText);
-                    else
-                        Console.Write(LoadMenu[i]);
+                else
+                    Console.Write(LoadMenu[i]);
             }
 
             int Selection = 0;
@@ -302,8 +300,6 @@ namespace GameLab5
 
         static void PlayGame()
         {
-            if (waveOut.PlaybackState == PlaybackState.Stopped)
-                waveOut.Play();
             Console.ForegroundColor = ConsoleColor.White;
             Clear();
             //Score Idea: Score goes down everytime you miss an alien
@@ -323,6 +319,7 @@ namespace GameLab5
 
             while (!gameover)
             {
+                PlaySong();
                 if (!haveSpawned)
                     level = getLevel();
                 updateHeader(level, score, ref oldScore, Player.Lives);
@@ -335,6 +332,18 @@ namespace GameLab5
             }
         }
 
+        static void PlaySong()
+        {
+
+
+            if (waveOut.PlaybackState.ToString() == "Stopped")
+            {
+
+                waveOut.Volume = 0.1F;
+                waveOut.Play();
+            }
+
+        }
         static void ClearSaved()
         {
             doc.Load("./Resources/GameSave.xml");
@@ -349,7 +358,7 @@ namespace GameLab5
                 Levels[i].LastChild.InnerText = "0";
                 LoadMenu[i] = "";
             }
-                Levels[0].LastChild.InnerText = "0";
+            Levels[0].LastChild.InnerText = "0";
 
 
             doc.Save("./Resources/GameSave.xml");
@@ -367,7 +376,7 @@ namespace GameLab5
             {
                 if (currentLevel < 5)
                     Levels[Convert.ToInt32(selectedNode.InnerText)].FirstChild.InnerText = "Load Level " + currentLevel;
-            else
+                else
                 if (currentLevel == 5)
                     Levels[Convert.ToInt32(selectedNode.InnerText)].FirstChild.InnerText = "Boss Battle";
                 else
@@ -410,7 +419,7 @@ namespace GameLab5
             int MinYSpawn = 5;
             Random pos = new Random();
             stopwatch shoot = new stopwatch();
-            
+
             switch (currentLevel)
             {
                 case 1:
@@ -747,6 +756,7 @@ namespace GameLab5
 
                         }
                         Player.StartPos(10, 15);
+
                         haveSpawned = true; //***********end of level change this **********
                     }
                     else //Where level loops
@@ -857,7 +867,7 @@ namespace GameLab5
                                     EndlessCounter = EndlessCounter - 2;
                                 else
                                     if (EndlessCounter > 15)
-                                        EndlessCounter--;
+                                    EndlessCounter--;
                                 break;
                             }
                         }
@@ -874,7 +884,7 @@ namespace GameLab5
                                     EndlessCounter = 50;
                                     SaveScore(currentLevel, score);
                                 }
-                                    
+
                                 Player.Redraw();
                             }
 
@@ -959,6 +969,7 @@ namespace GameLab5
 
 
             Console.ReadLine();
+            Clear();
         }
 
         public static int getHighscore(int level)
@@ -1014,6 +1025,7 @@ namespace GameLab5
 
 
             Console.ReadLine();
+
         }
 
         public static void updateHeader(int Level, int score, ref int oldScore, int lives)
@@ -1025,7 +1037,10 @@ namespace GameLab5
             }
 
             Console.SetCursorPosition(10, 0);
-            Console.Write("Level: " + Level);
+            if (Level == 6)
+                Console.Write("Level: Endless Mode");
+            else
+                Console.Write("Level: " + Level);
 
             if (score != oldScore)
             {
@@ -1041,6 +1056,8 @@ namespace GameLab5
             Console.Write("Score: " + score);
 
             Console.SetCursorPosition(100, 0);
+            Console.Write("                    ");
+            Console.SetCursorPosition(100, 0);
             Console.Write("Lives: " + lives);
         }
 
@@ -1048,7 +1065,7 @@ namespace GameLab5
         {
             doc.Load("./Resources/GameSave.xml");
             XmlNodeList Levels = doc.GetElementsByTagName("level");
-            for (int i = 0; i < Levels.Count;i++)
+            for (int i = 0; i < Levels.Count; i++)
             {
                 if (Levels[i].FirstChild.InnerText != "")
                 {
