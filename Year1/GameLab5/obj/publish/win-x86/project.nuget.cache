@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "VQW943KiYZmnTjFBEUf7iwVce/tR5jlpIozCDg3UbehqCPm1mcvn+v7HlP1p2tTDbxVM+dIkSCpIcRSqwpujFA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\naudio\\1.9.0-preview1\\naudio.1.9.0-preview1.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.21\\microsoft.netcore.app.runtime.win-x86.3.1.21.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.21\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.21.nupkg.sha512",
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.21\\microsoft.aspnetcore.app.runtime.win-x86.3.1.21.nupkg.sha512"
+  ],
+  "logs": []
+}

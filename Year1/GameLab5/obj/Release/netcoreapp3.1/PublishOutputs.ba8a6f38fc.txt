@@ -1,0 +1,6 @@
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\GameLab5.exe
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\GameLab5.dll
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\GameLab5.deps.json
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\GameLab5.runtimeconfig.json
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\GameLab5.pdb
+C:\Users\kevin\Documents\GitHub\Assignments-and-projects\Year1\GameLab5\bin\Release\netcoreapp3.1\publish\NAudio.dll

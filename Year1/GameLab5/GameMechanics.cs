@@ -279,8 +279,13 @@ namespace GameLab5
     }
     class Alien
     {
-        private AlienBullets Bullet = new AlienBullets(); //zthis needs to be outisde the object or each will have their own list 
+        private AlienBullets Bullet = new AlienBullets();
 
+        public int BulletSpeed
+        {
+            get { return Bullet.AlienBulletSpeed; }
+            set { Bullet.AlienBulletSpeed = value; }
+        }
         public int x { get; set; }
         public int y { get; set; }
         private int hp;
@@ -378,7 +383,9 @@ namespace GameLab5
         private int BulletY;
         private int LastX;
         private int LastY;
-        private int AlienBulletCooldown = 50;
+        public int AlienBulletSpeed = 50;
+
+
 
         public bool isFiring = false;
         //private bool hasSpawned = false;
@@ -402,7 +409,7 @@ namespace GameLab5
         {
             if (BulletX > 1)
             {
-                if (bTimer.isTimerDone(AlienBulletCooldown))
+                if (bTimer.isTimerDone(AlienBulletSpeed))
                 {
                     if (BulletX == PlayerX && BulletY == PlayerY)
                     {
@@ -414,7 +421,7 @@ namespace GameLab5
                     }
                     //Bullet behaviour:
                     if (BulletY != TargetY)
-                        if (TargetTimer.isTimerDone(500))
+                        if (TargetTimer.isTimerDone(AlienBulletSpeed * 10))
                             if (TargetY < BulletY)
                                 BulletY--;
                         else

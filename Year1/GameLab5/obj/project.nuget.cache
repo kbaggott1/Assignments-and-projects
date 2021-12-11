@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RmS9ZIarwaSYRFLwWcK0c3xVqv7KsaJBsqXzDv9CePb6OO3yPNKIgfP6wFYG19OVQ5oZVDpiOvfqUEUiCKUFfg==",
+  "dgSpecHash": "7TKXDgvhlLmwzRYX3j9ZoP51PB5n2m4wtbX1FIPsKKr2YFCbz4eTQUV4kuO7cU6NiOj9cdGubJt/Q1lZFPpelw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\amgst\\Desktop\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\kevin\\Documents\\GitHub\\Assignments-and-projects\\Year1\\GameLab5\\GameLab5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\naudio\\1.9.0-preview1\\naudio.1.9.0-preview1.nupkg.sha512"
+  ],
   "logs": []
 }
